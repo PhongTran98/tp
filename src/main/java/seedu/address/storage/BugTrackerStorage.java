@@ -11,7 +11,7 @@ import seedu.address.model.ReadOnlyBugTracker;
 /**
  * Represents a storage for {@link BugTracker}.
  */
-public interface AddressBookStorage {
+public interface BugTrackerStorage {
 
     /**
      * Returns the file path of the data file.

@@ -17,15 +17,15 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private BugTrackerStorage bugTrackerStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(BugTrackerStorage bugTrackerStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.bugTrackerStorage = bugTrackerStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -51,29 +51,29 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+        return bugTrackerStorage.getAddressBookFilePath();
     }
 
     @Override
     public Optional<ReadOnlyBugTracker> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+        return readAddressBook(bugTrackerStorage.getAddressBookFilePath());
     }
 
     @Override
     public Optional<ReadOnlyBugTracker> readAddressBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return bugTrackerStorage.readAddressBook(filePath);
     }
 
     @Override
     public void saveAddressBook(ReadOnlyBugTracker addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+        saveAddressBook(addressBook, bugTrackerStorage.getAddressBookFilePath());
     }
 
     @Override
     public void saveAddressBook(ReadOnlyBugTracker addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        bugTrackerStorage.saveAddressBook(addressBook, filePath);
     }
 
 }

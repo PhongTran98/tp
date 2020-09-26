@@ -17,7 +17,7 @@ import seedu.address.model.bug.Bug;
  * An Immutable AddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+class JsonSerializableBugTracker {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
@@ -27,7 +27,7 @@ class JsonSerializableAddressBook {
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedBug> persons) {
+    public JsonSerializableBugTracker(@JsonProperty("persons") List<JsonAdaptedBug> persons) {
         this.persons.addAll(persons);
     }
 
@@ -36,7 +36,7 @@ class JsonSerializableAddressBook {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyBugTracker source) {
+    public JsonSerializableBugTracker(ReadOnlyBugTracker source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedBug::new).collect(Collectors.toList()));
     }
 
