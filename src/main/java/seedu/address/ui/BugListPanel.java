@@ -13,9 +13,9 @@ import seedu.address.model.bug.Bug;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
+public class BugListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(BugListPanel.class);
 
     @FXML
     private ListView<Bug> personListView;
@@ -23,7 +23,7 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Bug> bugList) {
+    public BugListPanel(ObservableList<Bug> bugList) {
         super(FXML);
         personListView.setItems(bugList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
@@ -41,7 +41,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(bug, getIndex() + 1).getRoot());
+                setGraphic(new BugCard(bug, getIndex() + 1).getRoot());
             }
         }
     }
