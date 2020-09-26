@@ -20,7 +20,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Bug}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedBug {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
@@ -34,9 +34,9 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedBug(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                          @JsonProperty("email") String email, @JsonProperty("address") String address,
+                          @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -49,7 +49,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Bug source) {
+    public JsonAdaptedBug(Bug source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
