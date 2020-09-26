@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.bug.Bug;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -19,26 +19,26 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final BugTracker bugTracker;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Bug> filteredBugs;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyBugTracker addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.bugTracker = new BugTracker(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredBugs = new FilteredList<>(this.bugTracker.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new BugTracker(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -79,37 +79,37 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setBugTracker(ReadOnlyBugTracker bugTracker) {
+        this.bugTracker.resetData(bugTracker);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyBugTracker getBugTracker() {
+        return bugTracker;
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasPerson(Bug bug) {
+        requireNonNull(bug);
+        return bugTracker.hasPerson(bug);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deletePerson(Bug target) {
+        bugTracker.removePerson(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
+    public void addPerson(Bug bug) {
+        bugTracker.addPerson(bug);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setPerson(Bug target, Bug editedBug) {
+        requireAllNonNull(target, editedBug);
 
-        addressBook.setPerson(target, editedPerson);
+        bugTracker.setPerson(target, editedBug);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -119,14 +119,14 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Bug> getFilteredPersonList() {
+        return filteredBugs;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<Bug> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredBugs.setPredicate(predicate);
     }
 
     @Override
@@ -143,9 +143,9 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return bugTracker.equals(other.bugTracker)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredBugs.equals(other.filteredBugs);
     }
 
 }
