@@ -49,16 +49,18 @@ Format: `list`
 ### Adding a bug : `add`
 Adds a bug to the list
 
-Format: `add n/NAME d/DESCRIPTION [s/STATE]`
-* Add a bug with the specified name, description and state to the bottom of the list.
-* The state field is optional, all other fields are needed.
+Format: `add n/NAME d/DESCRIPTION [s/STATE] [pr/PRIORITY_LEVEL] ..[t/TAG]`
+* Add a bug with the specified name, description, state, priority level and tags to the bottom of the list.
+* The state, priority level and tag fields are optional, all other fields are needed.
 * If state is not specified, a default state of backlog will be assigned.
+* PRIORITY_LEVEL can only be 0, 1 or 2, representing LOW, MEDIUM and HIGH priority.
+* There can be multiple tags.
 
 Examples:
 * `add n/Print bug d/prints the wrong message s/todo`, adds a bug with name “Print Bug”, Description of “prints the wrong message” and state of “To do”.
 * `add n/move bug d/moves bug to wrong column s/backlog`, adds a bug with name “move bug”, Description of “moves bug to wrong column” and state of “Backlog”.
 * `add n/move bug d/UI`, adds a bug with name “move bug”, Description of “UI” and state of “Backlog”.
-
+* `add n/delete bug d/delete specify bug pr/2 t/feature t/by tomorrow`, adds a bug with name "delete bug", Description of "delete specify bug", priority level High, 2 tags "feature" and "by tomorrow". 
 
 ### Deleting a bug : `delete`
 Deletes a bug from the list
@@ -73,11 +75,11 @@ Example:
 ### Editing a bug : `edit`
 Edits an existing bug in the tracker
 
-Format: `edit INDEX [n/NEW_NAME] [d/NEW_DESCRIPTION]`
+Format: `edit INDEX [n/NEW_NAME] [d/NEW_DESCRIPTION] [pr/PRIORITY_LEVEL] ..[t/TAG]`
 
 - Edits the bug at the specified `INDEX`. The index refers to the index number shown in the displayed list of bugs. The Index **must be a positive integer** 1,2,3...
 - At least one of the optional fields must be provided.
-- Existing values will be updated to the input values.
+- Whichever optional fields provided will be overwritten by the new values. 
 
 Examples:
 
@@ -117,9 +119,9 @@ Data is saved into the hard disk everytime a change is made.
 |:--------:|:--------:|
 |  **help**  |  `help`  |
 |  **list**  |  `list`  |
-|  **add**  |  `add n/NAME d/DESCRIPTION s/STATE`  |
+|  **add**  |  `add n/NAME d/DESCRIPTION [s/STATE] [pr/PRIORITY_LEVEL] ..[t/TAG]`  |
 |  **delete**  |  `delete INDEX`  |
-|  **edit**  |  `edit INDEX [n/NEW_NAME] [d/NEW_DESCRIPTION]`  |
+|  **edit**  |  `edit INDEX [n/NEW_NAME] [d/NEW_DESCRIPTION] [pr/PRIORITY_LEVEL] ..[t/TAG]`  |
 |  **move**  |  `move INDEX s/STATE`  |
 |  **exit**  |  `exit`  |
 
