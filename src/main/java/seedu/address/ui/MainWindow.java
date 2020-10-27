@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -81,6 +82,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setAccelerators() {
+<<<<<<< Updated upstream
+=======
+        primaryStage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
+            if (KeyCode.ESCAPE == event.getCode()) {
+                handleExit();
+            }
+        });
+
+>>>>>>> Stashed changes
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
